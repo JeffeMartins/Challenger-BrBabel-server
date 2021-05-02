@@ -1,7 +1,6 @@
-// require('dotenv').config({path: __dirname + '/./../.env'})
-
-import express from 'express'
-import cors from 'cors'
+import * as express from 'express'
+import * as cors from 'cors'
+import connectionDB from './database/index'
 
 import routes from './router/routes'
 
@@ -13,6 +12,7 @@ class App {
         this.express = express()
         this.middlewares()
         this.routes()
+        this.database()
     }
 
     private middlewares(): void {
@@ -20,12 +20,11 @@ class App {
         this.express.use(cors())
     }
 
-    // private database(): void {
-    //
-    // }
+    private database(): void {
+        connectionDB.connectionPostgres()
+    }
 
     private routes(): void {
-
         this.express.use(routes)
     }
 }
@@ -33,18 +32,6 @@ class App {
 export default new App().express
 
 
-// const routes = require('./router/routes');
-// var bodyParser = require('body-parser');
-// const app = express();
-//
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(bodyParser.json())
-// app.use(cors());
-// // app.use(express.json());
-//
-// const port = process.env["SERVER_PORT"] || 8080;
-// app.use(routes);
-//
-// app.listen(port)
+
 
 
