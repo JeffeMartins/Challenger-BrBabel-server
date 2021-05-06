@@ -10,9 +10,9 @@ import selectOneCompany from '../controller/SelectCompany'
 const routes = Router();
 
 routes.post('/authorization/api', Auth.authenticate)
-routes.post('/insert/Company', verifyJWT.authToken, insertCompany.newCompany)
-routes.put('/update/company', verifyJWT.authToken, updateCompany.updateCompany)
-routes.delete('/delete/company', verifyJWT.authToken, deleteCompany.deleteCompany)
+routes.post('/insert/company', verifyJWT.authToken, insertCompany.newCompany)
+routes.put('/update/company/:id', verifyJWT.authToken, updateCompany.updateCompany)
+routes.delete('/delete/company/:id', verifyJWT.authToken, deleteCompany.deleteCompany)
 routes.get('/select-all/company', verifyJWT.authToken, selectAllCompany.selectAllCompany)
 routes.get('/select/company/:id', verifyJWT.authToken, selectOneCompany.selectCompany)
 

@@ -10,7 +10,7 @@ class UpdateCompany {
                 .createQueryBuilder()
                 .update(Company)
                 .set(req.body)
-                .where("id = :id", {id: req.body.id})
+                .where("id = :id", {id: req.params.id})
                 .execute();
             return resp.json("Update done");
 

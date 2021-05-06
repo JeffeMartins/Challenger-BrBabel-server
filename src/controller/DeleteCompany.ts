@@ -10,7 +10,7 @@ class DeleteCompany {
                 .createQueryBuilder()
                 .delete()
                 .from(Company)
-                .where("id = :id", {id: req.body.id})
+                .where("id = :id", {id: req.params.id})
                 .execute();
             return resp.json("Delete done");
 
