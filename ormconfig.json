@@ -1,10 +1,10 @@
 {
-  "type": "postgres",
-  "host": "globusdb.coymbr1bkj3n.sa-east-1.rds.amazonaws.com",
-  "port": 5432,
-  "username": "RevoluTISys",
-  "password": "globusSeguros0",
-  "database": "rcmedicoTestdb",
+  "type": "",
+  "host": "",
+  "port": "" ,
+  "username": "",
+  "password": "",
+  "database": "",
   "synchronize": true,
   "logging": false,
   "entities": [
