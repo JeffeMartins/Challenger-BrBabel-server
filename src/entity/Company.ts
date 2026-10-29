@@ -15,7 +15,7 @@ export class Company {
     @Column()
     demand: number;
 
-    @Column()
+    @Column('double precision')
     annualBilling: number;
 
     @Column({

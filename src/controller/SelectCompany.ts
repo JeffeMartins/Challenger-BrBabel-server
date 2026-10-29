@@ -1,4 +1,4 @@
-import {getConnection} from "typeorm";
+import { database } from '../database';
 import {Request, Response} from "express";
 import {Company} from '../entity/Company'
 
@@ -6,7 +6,7 @@ class SelectCompany {
     async selectCompany(req: Request, resp: Response) {
 
         try {
-            const company = await getConnection()
+            const company = await database
                 .getRepository(Company)
                 .createQueryBuilder("company")
                 .where("company.id = :id", {id: req.params.id})

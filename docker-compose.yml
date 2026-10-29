@@ -1,0 +1,28 @@
+name: challenger-brbabel-server
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      POSTGRES_DB: companies
+    volumes: [postgres-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U portfolio -d companies"]
+      interval: 5s
+      retries: 20
+  api:
+    build: .
+    ports: ["127.0.0.1:3334:3334"]
+    environment:
+      DATABASE_URL: postgresql://portfolio:${DB_PASSWORD:?Configure DB_PASSWORD}@db:5432/companies
+      SERVER_PORT: 3334
+      NODE_ENV: development
+      AUTH_USER: ${AUTH_USER:?Configure AUTH_USER}
+      AUTH_PASSWORD: ${AUTH_PASSWORD:?Configure AUTH_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?Configure JWT_SECRET}
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  postgres-data:

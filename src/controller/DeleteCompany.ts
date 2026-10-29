@@ -1,4 +1,4 @@
-import {getConnection} from "typeorm";
+import { database } from '../database';
 import {Request, Response} from "express";
 import {Company} from '../entity/Company'
 
@@ -6,7 +6,7 @@ class DeleteCompany {
     async deleteCompany(req: Request, resp: Response) {
 
         try {
-            await getConnection()
+            await database
                 .createQueryBuilder()
                 .delete()
                 .from(Company)

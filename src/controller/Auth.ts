@@ -11,18 +11,18 @@ class Auth {
 
             if (req.body.user == authConfig.user && req.body.password == authConfig.password) {
 
-                const token = jwt.sign({user: req.body.user, password: req.body.password}, authConfig.secret, {
+                const token = jwt.sign({sub: req.body.user}, authConfig.secret, {
                     expiresIn: 86400,
                 })
 
                 return resp.json({token: token, expires_in: 86400, type: 'jwt'})
             } else {
-                return resp.status(400).send({error: 'fails authentication'})
+                return resp.status(401).send({error: 'fails authentication'})
             }
 
 
         } catch (e) {
-            return resp.status(400).send({error: 'web token failed'})
+            return resp.status(401).send({error: 'web token failed'})
         }
     }
 }

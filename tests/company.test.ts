@@ -1,0 +1,2 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {companyInput} from '../src/validation/company';
+test('company input rejects invalid numbers and discards unexpected fields',()=>{const valid={name:' Demo ',cnpj:'12345678000190',demand:1,annualBilling:10.5,about:'Company',id:123};const result=companyInput(valid);assert.equal(result.name,'Demo');assert.equal('id' in result,false);assert.throws(()=>companyInput({...valid,demand:-1}));assert.throws(()=>companyInput({...valid,annualBilling:Infinity}));});
