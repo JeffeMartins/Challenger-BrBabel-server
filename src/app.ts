@@ -1,5 +1,5 @@
-import * as express from 'express'
-import * as cors from 'cors'
+import express from 'express'
+import cors from 'cors'
 import connectionDB from './database/index'
 
 import routes from './router/routes'
@@ -12,11 +12,11 @@ class App {
         this.express = express()
         this.middlewares()
         this.routes()
-        this.database()
+
     }
 
     private middlewares(): void {
-        this.express.use(express.json())
+        this.express.disable('x-powered-by'); this.express.use(require('helmet')()); this.express.use(express.json({limit:'16kb'}))
         this.express.use(cors())
     }
 
@@ -30,8 +30,3 @@ class App {
 }
 
 export default new App().express
-
-
-
-
-

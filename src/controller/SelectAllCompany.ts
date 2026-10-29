@@ -1,4 +1,4 @@
-import {getConnection} from "typeorm";
+import { database } from '../database';
 import {Request, Response} from "express";
 import {Company} from '../entity/Company'
 
@@ -6,7 +6,7 @@ class SelectAllCompany {
     async selectAllCompany(req: Request, resp: Response) {
 
         try {
-            const companyAll = await getConnection()
+            const companyAll = await database
                 .getRepository(Company)
                 .find()
 

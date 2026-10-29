@@ -1,4 +1,5 @@
-import {getConnection} from "typeorm";
+import {companyInput} from '../validation/company';
+import { database } from '../database';
 import {Request, Response} from "express";
 import {Company} from '../entity/Company'
 
@@ -6,11 +7,11 @@ class InsertCompany {
     async newCompany(req: Request, resp: Response) {
 
         try {
-            await getConnection()
+            await database
                 .createQueryBuilder()
                 .insert()
                 .into(Company)
-                .values(req.body)
+                .values(companyInput(req.body))
                 .execute();
 
             return resp.json({menssage: "insert done"});

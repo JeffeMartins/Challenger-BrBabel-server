@@ -1,15 +1,5 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-
-class ConnectionDB {
-    public connectionPostgres() {
-        createConnection().then(async connection => {
-            console.log("DB postgres connected.");
-        }).catch(error => console.log(`connection error: ${error}`))
-    }
-}
-
-export default new ConnectionDB()
-
-
-
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import { Company } from '../entity/Company';
+export const database = new DataSource({type:'postgres',url:process.env.DATABASE_URL,entities:[Company],synchronize:process.env.NODE_ENV !== 'production'});
+export default { connectionPostgres: () => database.initialize() };

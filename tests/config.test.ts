@@ -1,0 +1,2 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import config from '../src/config/Config';
+test('missing or short signing keys fail instead of using a committed secret',()=>{delete process.env.JWT_SECRET;assert.throws(()=>config.secret);process.env.JWT_SECRET='short';assert.throws(()=>config.secret);process.env.JWT_SECRET='a'.repeat(40);assert.equal(config.secret.length,40);});
